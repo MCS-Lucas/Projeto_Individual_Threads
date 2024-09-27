@@ -8,7 +8,7 @@ public class ContaLoja extends Conta{
     double salario = 1400.00;
 
     public ContaLoja(double saldoAtual, String nomeUsuario, Banco banco) {
-        super(saldoAtual, nomeUsuario);
+        super(saldoAtual, nomeUsuario, banco);
         this.banco = banco;
     }
 

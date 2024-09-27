@@ -7,10 +7,15 @@ public class ContaCliente extends Conta{
     private int iCount;
     private static final int MAX_COMPRAS = 4;
 
-    public ContaCliente(double saldoAtual, String nomeUsuario, Banco banco) {
-        super(saldoAtual, nomeUsuario);
+    public ContaCliente(double saldoAtual, String nomeUsuario, Banco banco) throws Exception {
+        super(saldoAtual, nomeUsuario, banco);
+
+        if (banco == null) {
+            throw new Exception("O banco não pode ser nulo.");
+        }
         this.banco = banco;
         this.iCount = 0;
+
     }
 
     public double comprar(Loja loja) throws Exception {

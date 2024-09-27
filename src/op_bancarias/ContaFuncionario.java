@@ -5,8 +5,11 @@ import usuarios.Funcionario;
 
 public class ContaFuncionario extends Conta{
 
-    public ContaFuncionario(double saldoAtual, String nomeUsuario, Banco banco) {
-        super(saldoAtual, nomeUsuario);
+    public ContaFuncionario(double saldoAtual, String nomeUsuario, Banco banco) throws Exception {
+        super(saldoAtual, nomeUsuario, banco);
+        if (banco == null) {
+            throw new Exception("O banco não pode ser nulo.");
+        }
         this.banco = banco;
     }
 

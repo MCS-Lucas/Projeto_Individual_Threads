@@ -11,12 +11,25 @@ import entidades.Banco;
     protected String nomeUsuario;
     protected Banco banco;
 
-    Conta( double saldoAtual, String nomeUsuario){
+    public Conta( double saldoAtual, String nomeUsuario, Banco banco){
+
+        if (banco == null) {
+            throw new IllegalArgumentException("O banco não pode ser nulo.");
+        }
 
         this.nomeUsuario = nomeUsuario;
         this.numeroConta = random.nextInt(2001) + 1000;
         this.saldo = saldoAtual;
+        this.banco = banco;
 
+    }
+
+    public void setBanco(Banco banco) {
+        this.banco = banco;
+    }
+
+    public Banco getBanco() {
+        return banco;
     }
 
     public String getNomeUsuario() {

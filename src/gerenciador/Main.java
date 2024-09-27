@@ -28,12 +28,16 @@ public class Main {
 
         Banco banco = new Banco();
 
+        if (banco == null) {
+            throw new Exception("O banco não pode ser nulo.");
+        }
+
         List<Thread> t = new ArrayList<>();
         List<Loja> lojas = new ArrayList<>();
 
         for(i = 0; i < 2; i++) {
             try {
-                Loja loja = new Loja(nomeLoja[i]);
+                Loja loja = new Loja(nomeLoja[i], banco);
                 lojas.add(loja);
                 System.out.println("Loja " + loja.getNomeLoja() + " cadastrada com sucesso.");
                 banco.armazenarConta(loja.getConta());
@@ -46,13 +50,10 @@ public class Main {
         for(i = 0; i < 4; i++) {
             try {
                 Loja empregadora = lojas.get(i % 2);
-                Funcionario funcionario = new Funcionario(nome[i], cpf[i], idade[i], lojas.get(0));
-
+                Funcionario funcionario = new Funcionario(nome[i], cpf[i], idade[i], empregadora, banco);
                 empregadora.addFuncionario(funcionario);
                 banco.armazenarConta(funcionario.getConta());
-
-                System.out.println("Funcionário " + (i + 1) + " cadastrado com na Loja " + empregadora.getNomeLoja() + " sucesso.");
-
+                System.out.println("Funcionário " + funcionario.getNome() + " cadastrado com na Loja " + empregadora.getNomeLoja() + " sucesso.");
                 Thread thread = new Thread(funcionario);
                 t.add(thread);
                 thread.start();
@@ -64,14 +65,11 @@ public class Main {
         for(i = 4; i < 14; i++) {
             try {
                 Cliente cliente = new Cliente(nome[i], cpf[i], idade[i], lojas, banco);
-                System.out.println("Cliente " + (i -3) + " cadastrado com sucesso.");
-
+                System.out.println("Cliente " + cliente.getNome() + " cadastrado com sucesso.");
                 banco.armazenarConta(cliente.getConta());
-
                 Thread thread = new Thread(cliente);
                 t.add(thread);
                 thread.start();
-
             } catch (Exception e) {
                 e.printStackTrace();
             }

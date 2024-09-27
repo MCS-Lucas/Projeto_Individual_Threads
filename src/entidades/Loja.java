@@ -17,7 +17,7 @@ public class Loja {
 
 
 
-    public Loja(String nomeLoja) throws Exception{
+    public Loja(String nomeLoja, Banco banco) throws Exception{
         if (iCount >= MAX_LOJAS) {
             throw new Exception("Número máximo de lojas atingido.");
         }
@@ -25,6 +25,7 @@ public class Loja {
         this.nomeLoja = nomeLoja;
         this.conta = new ContaLoja(0.0,getNomeLoja(), banco);
         this.funcionarios = new ArrayList<>();
+        this.banco = banco;
 
     }
 
