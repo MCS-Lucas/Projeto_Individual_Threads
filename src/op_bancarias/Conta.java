@@ -1,27 +1,26 @@
 package op_bancarias;
 import java.util.Random;
+import java.util.ArrayList;
+import java.util.List;
 
-public class Conta {
 
-    protected Random random = new Random();
-    private int numeroConta;
-    private double saldo;
-    private String nomeUsuario;
+    public class Conta {
 
-    Conta( double saldoInicial, String nomeUsuario){
+    private Random random = new Random();
+    protected int numeroConta;
+    protected double saldo;
+    protected String nomeUsuario;
+
+    Conta( double saldoAtual, String nomeUsuario){
 
         this.nomeUsuario = nomeUsuario;
         this.numeroConta = random.nextInt(2001) + 1000;
-        this.saldo = saldo;
+        this.saldo = saldoAtual;
 
     }
 
     public String getNomeUsuario() {
         return nomeUsuario;
-    }
-
-    public void setNomeUsuario(String nomeUsuario) {
-        this.nomeUsuario = nomeUsuario;
     }
 
     public int getNumeroConta() {
@@ -41,5 +40,11 @@ public class Conta {
     public void depositar(double valor){
         this.saldo += valor;
     }
+
+    public String verificarConta(){
+        return "Nome: " + getNomeUsuario() +
+                "\nNúmero da conta: " + getNumeroConta() +
+                "\nSaldo: " + getSaldo();
+       }
 
 }
