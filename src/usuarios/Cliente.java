@@ -23,6 +23,8 @@ public class Cliente extends Pessoa implements Runnable{
 
     public void run() {
 
+
+
     }
 
 

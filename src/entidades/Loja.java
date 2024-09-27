@@ -15,6 +15,7 @@ public class Loja {
     private ContaLoja conta;
 
 
+
     public Loja(String nomeLoja) throws Exception{
         if (iCount >= MAX_LOJAS) {
             throw new Exception("Número máximo de lojas atingido.");

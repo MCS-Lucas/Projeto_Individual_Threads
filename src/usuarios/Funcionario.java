@@ -4,7 +4,7 @@ import op_bancarias.ContaFuncionario;
 public class Funcionario extends Pessoa implements Runnable{
     private static int iCount = 0;
     private static final int MAX_FUNCIONARIOS = 4;
-    private ContaFuncionario conta;
+    private ContaFuncionario conta, contaInvestimentos;
 
     public Funcionario(String nome, String cpf, int idade) throws Exception {
         super(nome, cpf, idade);
@@ -13,6 +13,7 @@ public class Funcionario extends Pessoa implements Runnable{
         }
         iCount++;
         this.conta = new ContaFuncionario(0.0,getNome());
+        this.contaInvestimentos = new ContaFuncionario(0.0,getNome());
     }
 
     public ContaFuncionario getConta() {

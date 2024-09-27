@@ -22,7 +22,19 @@ public class Main {
         Banco banco = new Banco();
 
         List<Thread> t = new ArrayList<>();
+        List<Loja> lojas = new ArrayList<>();
 
+        for(i = 0; i < 2; i++) {
+            try {
+                Loja loja = new Loja(nomeLoja[i]);
+                lojas.add(loja);
+                System.out.println("Loja " + loja.getNomeLoja() + " cadastrada com sucesso.");
+                banco.armazenarConta(loja.getConta());
+
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
+        }
 
         for(i = 0; i < 4; i++) {
             try {
@@ -52,21 +64,5 @@ public class Main {
                 e.printStackTrace();
             }
         }
-
-        for(i = 0; i < 2; i++) {
-            try {
-                Loja loja = new Loja(nomeLoja[i]);
-                System.out.println("Loja "+ loja.getNomeLoja() + " cadastrada com sucesso.");
-
-                banco.armazenarConta(loja.getConta());
-
-            } catch (Exception e) {
-                e.printStackTrace();
-
-
-            }
-        }
-
-
     }
 }

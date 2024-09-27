@@ -1,7 +1,6 @@
 package op_bancarias;
 import java.util.Random;
-import java.util.ArrayList;
-import java.util.List;
+import entidades.Banco;
 
 
     public class Conta {
@@ -10,6 +9,7 @@ import java.util.List;
     protected int numeroConta;
     protected double saldo;
     protected String nomeUsuario;
+    protected Banco banco;
 
     Conta( double saldoAtual, String nomeUsuario){
 
@@ -31,9 +31,6 @@ import java.util.List;
         return saldo;
     }
 
-    public void setSaldo(double saldo) {
-        this.saldo = saldo;
-    }
     public void debitar(double valor){
         this.saldo -= valor;
     }
