@@ -13,6 +13,7 @@ public class Loja {
     private List<Funcionario> funcionarios;
     private String nomeLoja;
     private ContaLoja conta;
+    private Banco banco;
 
 
 
@@ -22,8 +23,7 @@ public class Loja {
         }
         iCount++;
         this.nomeLoja = nomeLoja;
-
-        this.conta = new ContaLoja(0.0,getNomeLoja());
+        this.conta = new ContaLoja(0.0,getNomeLoja(), banco);
         this.funcionarios = new ArrayList<>();
 
     }
@@ -41,4 +41,5 @@ public class Loja {
     public ContaLoja getConta() {
         return conta;
     }
+
 }

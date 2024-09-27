@@ -10,7 +10,6 @@ public class Banco {
     private List<Conta> contas;
     private Double cofreBanco = 0.0;
 
-
     public Banco() throws Exception {
         if (iCount >= MAX_BANCOS) {
             throw new Exception("Número máximo de bancos atingido.");
@@ -30,18 +29,23 @@ public class Banco {
     public synchronized void transacao(Conta contaTipo, Double valorTransacao, Conta contaDestino){
 
         if (contaTipo instanceof ContaCliente) {
-
             contaTipo.debitar(valorTransacao);
             setCofreBanco(getCofreBanco() + valorTransacao);
             contaDestino.depositar(valorTransacao);
             setCofreBanco(getCofreBanco() - valorTransacao);
 
         } else if (contaTipo instanceof ContaLoja && contaDestino instanceof ContaFuncionario) {
-
             contaTipo.debitar(valorTransacao);
             setCofreBanco(getCofreBanco() + valorTransacao);
             contaDestino.depositar(valorTransacao);
             setCofreBanco(getCofreBanco() - valorTransacao);
+
+        }else if(contaTipo instanceof ContaFuncionario){
+            contaTipo.debitar(valorTransacao);
+            setCofreBanco(getCofreBanco() + valorTransacao);
+            contaDestino.depositar(valorTransacao);
+            setCofreBanco(getCofreBanco() - valorTransacao);
+
         }
 
 

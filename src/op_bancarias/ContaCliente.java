@@ -4,12 +4,13 @@ import java.util.Random;
 
 public class ContaCliente extends Conta{
 
-    private static int iCount = 0;
+    private int iCount;
     private static final int MAX_COMPRAS = 4;
 
-    public ContaCliente(double saldoAtual, String nomeUsuario) {
+    public ContaCliente(double saldoAtual, String nomeUsuario, Banco banco) {
         super(saldoAtual, nomeUsuario);
-
+        this.banco = banco;
+        this.iCount = 0;
     }
 
     public double comprar(Loja loja) throws Exception {
