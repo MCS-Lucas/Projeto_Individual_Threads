@@ -1,6 +1,7 @@
 package usuarios;
+import op_bancarias.Conta;
 
-public class Funcionario {
+public class Funcionario implements Runnable{
     private static int iCount = 0;
     private static final int MAX_FUNCIONARIOS = 4;
 
@@ -9,7 +10,7 @@ public class Funcionario {
     private int idade;
 
 
-    Funcionario(int numeroConta, double saldoInicial, int senha, String nomeUsuario) throws Exception {
+    public Funcionario(String nome, String cpf, int idade) throws Exception {
         if (iCount >= MAX_FUNCIONARIOS) {
             throw new Exception("Número máximo de clientes atingido.");
         }
@@ -35,5 +36,8 @@ public class Funcionario {
     }
     public void setIdade(int idade) {
         this.idade = idade;
+    }
+    public void run() {
+
     }
 }

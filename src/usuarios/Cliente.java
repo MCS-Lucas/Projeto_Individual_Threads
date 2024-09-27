@@ -1,6 +1,7 @@
 package usuarios;
+import op_bancarias.Conta;
 
-public class Cliente {
+public class Cliente implements Runnable{
 
     private static int iCount = 0;
     private static final int MAX_CLIENTES = 10;
@@ -10,7 +11,7 @@ public class Cliente {
     private int idade;
 
 
-    Cliente() throws Exception {
+    public Cliente(String nome, String cpf, int idade) throws Exception {
         if (iCount >= MAX_CLIENTES) {
             throw new Exception("Número máximo de clientes atingido.");
         }
@@ -36,5 +37,8 @@ public class Cliente {
     }
     public void setIdade(int idade) {
         this.idade = idade;
+    }
+    public void run() {
+
     }
 }
