@@ -1,7 +1,6 @@
 package op_bancarias;
 import java.util.Random;
-import java.util.ArrayList;
-import java.util.List;
+import entidades.Banco;
 
 
     public class Conta {
@@ -10,13 +9,27 @@ import java.util.List;
     protected int numeroConta;
     protected double saldo;
     protected String nomeUsuario;
+    protected Banco banco;
 
-    Conta( double saldoAtual, String nomeUsuario){
+    public Conta( double saldoAtual, String nomeUsuario, Banco banco){
+
+        if (banco == null) {
+            throw new IllegalArgumentException("O banco não pode ser nulo.");
+        }
 
         this.nomeUsuario = nomeUsuario;
         this.numeroConta = random.nextInt(2001) + 1000;
         this.saldo = saldoAtual;
+        this.banco = banco;
 
+    }
+
+    public void setBanco(Banco banco) {
+        this.banco = banco;
+    }
+
+    public Banco getBanco() {
+        return banco;
     }
 
     public String getNomeUsuario() {
@@ -31,9 +44,6 @@ import java.util.List;
         return saldo;
     }
 
-    public void setSaldo(double saldo) {
-        this.saldo = saldo;
-    }
     public void debitar(double valor){
         this.saldo -= valor;
     }
@@ -44,7 +54,7 @@ import java.util.List;
     public String verificarConta(){
         return "Nome: " + getNomeUsuario() +
                 "\nNúmero da conta: " + getNumeroConta() +
-                "\nSaldo: " + getSaldo();
+                "\nSaldo Atual: " + getSaldo();
        }
 
 }
