@@ -30,6 +30,7 @@ public class Cliente extends Pessoa implements Runnable {
         }
     }
     public ContaCliente getConta() {
+
         return conta;
     }
 
@@ -38,11 +39,15 @@ public class Cliente extends Pessoa implements Runnable {
         StringBuilder organizador = new StringBuilder();
 
         try {
+
+            organizador.append("===================EXTRATO====================\n");
+
             for (int i = 0; i < 2; i++) {
                 double valorCompra = conta.comprar(lojas.get(0));
                 organizador.append("Cliente ").append(getNome()).append(" comprou na loja ").append(lojas.get(0).getNomeLoja()).append("\n");
                 organizador.append("Valor da transação: R$ ").append(String.format("%.2f", valorCompra)).append("\n");
                 organizador.append("------------------------------------------\n");
+
             }
             for (int i = 0; i < 2; i++) {
                 double valorCompra = conta.comprar(lojas.get(1));
@@ -50,22 +55,26 @@ public class Cliente extends Pessoa implements Runnable {
                 organizador.append("Valor da transação: R$ ").append(String.format("%.2f", valorCompra)).append("\n");
                 organizador.append("------------------------------------------\n");
             }
+            organizador.append("+============INFORMAÇÕES DA CONTA=============+\n");
+            organizador.append(conta.verificarConta()).append("\n");
+            organizador.append("==============================================\n");
+
         } catch (Exception e) {
             organizador.append(e.getMessage()).append("\n");
         }
 
-        synchronized (System.out){
+        synchronized (System.out) {
             System.out.println(organizador.toString());
         }
 
-        lock.lock();
+        Main.lock.lock();
         try {
             Main.clientesAtendidos++;
             if (Main.clientesAtendidos == 10) {
-                clientesComprando.signalAll();
+                Main.clientesComprando.signalAll();
             }
         } finally {
-            lock.unlock();
+            Main.lock.unlock();
         }
     }
 }

@@ -13,9 +13,11 @@ public class ContaFuncionario extends Conta{
         this.banco = banco;
     }
 
-    public void depositarInvestimento(Funcionario funcionario){
+    public double depositarInvestimento(Funcionario funcionario){
 
+        double valorDepositado = funcionario.getConta().getSaldo() * 0.20;
         banco.transacao(this, (funcionario.getConta().getSaldo() * 0.20), funcionario.getContaInvestimentos());
 
+        return valorDepositado;
     }
 }

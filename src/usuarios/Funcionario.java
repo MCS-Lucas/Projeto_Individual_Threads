@@ -9,6 +9,7 @@ public class Funcionario extends Pessoa implements Runnable {
     private ContaFuncionario conta;
     private ContaFuncionario contaInvestimentos;
     private Loja loja;
+    private static boolean primeiroPrint= false;
     private Banco banco;
 
     public Funcionario(String nome, String cpf, int idade, Loja loja, Banco banco) throws Exception {
@@ -34,24 +35,51 @@ public class Funcionario extends Pessoa implements Runnable {
     public ContaFuncionario getContaInvestimentos() {
         return contaInvestimentos;
     }
-
     public void run() {
 
-        try {
-            Main.lock.lock();
-            try{
-                while (Main.clientesAtendidos < 10) {
+        StringBuilder organizador = new StringBuilder();
 
+        try {
+
+            Main.lock.lock();
+            try {
+                while (Main.clientesAtendidos != 10) {
                     Main.clientesComprando.await();
                 }
-            }finally {
+            } finally {
                 Main.lock.unlock();
             }
+
+            if (!primeiroPrint) {
+                organizador.append("INFORMAÇÕES FUNCIONARIOS");
+                organizador.append("\n\n");
+                primeiroPrint = true;
+            }
+
+            organizador.append("===================EXTRATO====================\n");
             loja.getConta().pagarFuncionario(this);
+            organizador.append("Funcionário ").append(getNome()).append(" recebeu o salário.\n");
             conta.depositarInvestimento(this);
+            organizador.append("Funcionário ").append(getNome()).append(" depositou 20% do salário em investimentos.\n");
+            organizador.append("+============INFORMAÇÕES DA CONTA=============+\n");
+            organizador.append(conta.verificarConta()).append("\n");
+            organizador.append("+====INFORMAÇÕES DA CONTA DE INVESTIMENTOS====+\n");
+            organizador.append(contaInvestimentos.verificarConta()).append("\n");
+            organizador.append("==============================================\n");
+
+            synchronized (System.out) {
+                System.out.println(organizador.toString());
+            }
 
         }catch (Exception e){
             System.out.println(e.getMessage());
         }
+    }
+
+    @Override
+    public String toString() {
+        return "Nome: " + getNome() + "\n" +
+                "Cpf: " + getCpf() + "\n" +
+                "Idade: " + getIdade();
     }
 }

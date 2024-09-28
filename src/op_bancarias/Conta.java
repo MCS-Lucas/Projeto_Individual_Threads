@@ -54,7 +54,7 @@ import entidades.Banco;
     public String verificarConta(){
         return "Nome: " + getNomeUsuario() +
                 "\nNúmero da conta: " + getNumeroConta() +
-                "\nSaldo: " + getSaldo();
+                "\nSaldo Atual: " + getSaldo();
        }
 
 }

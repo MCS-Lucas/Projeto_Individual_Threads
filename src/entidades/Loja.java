@@ -39,6 +39,9 @@ public class Loja {
         }
         funcionarios.add(funcionario);
     }
+    public List<Funcionario> getFuncionarios() {
+        return funcionarios;
+    }
     public ContaLoja getConta() {
         return conta;
     }
